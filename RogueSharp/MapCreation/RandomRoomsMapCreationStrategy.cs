@@ -80,6 +80,7 @@ namespace RogueSharp.MapCreation
 
             var newRoom = new Rectangle( roomXPosition, roomYPosition, roomWidth, roomHeight );
             bool newRoomIntersects = false;
+                
             foreach ( Rectangle room in rooms )
             {
                if ( newRoom.Intersects( room ) )
@@ -90,13 +91,15 @@ namespace RogueSharp.MapCreation
             }
             if ( !newRoomIntersects )
             {
+                    
                rooms.Add( newRoom );
             }
          }
-
-         foreach ( Rectangle room in rooms )
+            int roomID = 0;
+            foreach ( Rectangle room in rooms )
          {
-            MakeRoom( map, room );
+                roomID++;
+                MakeRoom( map, room , roomID);
          }
 
          for ( int r = 0; r < rooms.Count; r++ )
@@ -126,13 +129,14 @@ namespace RogueSharp.MapCreation
          return map;
       }
 
-      private static void MakeRoom( T map, Rectangle room )
+      private static void MakeRoom( T map, Rectangle room , int roomID)
       {
+         
          for ( int x = room.Left + 1; x < room.Right; x++ )
          {
             for ( int y = room.Top + 1; y < room.Bottom; y++ )
             {
-               map.SetCellProperties( x, y, true, true );
+               map.SetCellProperties(x, y, true, true, false, roomID);
             }
          }
       }

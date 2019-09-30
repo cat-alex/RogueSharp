@@ -14,7 +14,7 @@
       /// <param name="isWalkable">Could a character could normally walk across the Cell without difficulty</param>
       /// <param name="isInFov">Is the Cell currently in the currently observable field-of-view</param>
       /// <param name="isExplored">Has this Cell ever been explored by the player</param>
-      public Cell( int x, int y, bool isTransparent, bool isWalkable, bool isInFov, bool isExplored )
+      public Cell( int x, int y, bool isTransparent, bool isWalkable, bool isInFov, bool isExplored , int roomID)
       {
          X = x;
          Y = y;
@@ -22,6 +22,7 @@
          IsWalkable = isWalkable;
          IsInFov = isInFov;
          IsExplored = isExplored;
+         RoomID = roomID;
       }
 
       /// <summary>
@@ -40,6 +41,7 @@
          IsWalkable = isWalkable;
          IsInFov = isInFov;
          IsExplored = false;
+         RoomID = 0;
       }
 
       /// <summary>
@@ -98,6 +100,8 @@
       /// This property can be used to keep track of those Cells that have been "seen" and could be used to show fog-of-war type effects when rendering the map
       /// </example>
       public bool IsExplored { get; private set; }
+
+      public int RoomID { get; private set; }
 
       /// <summary>
       /// Provides a simple visual representation of the Cell using the following symbols:

@@ -46,6 +46,8 @@ Breaking changes:
     <RepositoryType>Git</RepositoryType>
     <PackageTags>roguelike libtcod pathfinding game map random generator field-of-view fog-of-war dice</PackageTags>
     <PackageIconUrl>https://content.screencast.com/users/dr.zeus/folders/Blog%20Links/media/66acf3c6-3b44-4bdd-b1f5-e89a62489b20/nugeticon.png</PackageIconUrl>
+    <AssemblyVersion>4.2.0.1</AssemblyVersion>
+    <FileVersion>4.2.0.1</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

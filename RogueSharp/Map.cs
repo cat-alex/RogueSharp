@@ -16,6 +16,7 @@ namespace RogueSharp
       private bool[,] _isTransparent;
       private bool[,] _isWalkable;
       private bool[,] _isExplored;
+      private int [,] _roomID;
 
       /// <summary>
       /// Constructor creates a new uninitialized Map
@@ -74,6 +75,8 @@ namespace RogueSharp
          _isWalkable = new bool[width, height];
          _isExplored = new bool[width, height];
          _fieldOfView = new FieldOfView( this );
+         _roomID = new int[width, height];
+         _roomID.Initialize();
       }
 
       /// <summary>
@@ -158,11 +161,17 @@ namespace RogueSharp
       /// <param name="isTransparent">True if line-of-sight is not blocked by this Cell. False otherwise</param>
       /// <param name="isWalkable">True if a character could walk across the Cell normally. False otherwise</param>
       /// <param name="isExplored">True if the Cell has ever been in the field-of-view of the player. False otherwise</param>
-      public void SetCellProperties( int x, int y, bool isTransparent, bool isWalkable, bool isExplored )
+      public void SetCellProperties( int x, int y, bool isTransparent, bool isWalkable, bool isExplored, int roomID)
       {
          _isTransparent[x, y] = isTransparent;
          _isWalkable[x, y] = isWalkable;
          _isExplored[x, y] = isExplored;
+         _roomID[x, y] = roomID;
+      }
+
+      public void SetCellProperties( int x, int y, bool isTransparent, bool isWalkable, bool isExplored)
+      {
+         SetCellProperties( x, y, isTransparent, isWalkable, isExplored, _roomID[x, y] );
       }
 
       /// <summary>
@@ -175,9 +184,9 @@ namespace RogueSharp
       /// <param name="y">Y location of the Cell to set properties on, starting with 0 as the top</param>
       /// <param name="isTransparent">True if line-of-sight is not blocked by this Cell. False otherwise</param>
       /// <param name="isWalkable">True if a character could walk across the Cell normally. False otherwise</param>
-      public void SetCellProperties( int x, int y, bool isTransparent, bool isWalkable )
+      public void SetCellProperties( int x, int y, bool isTransparent, bool isWalkable)
       {
-         SetCellProperties( x, y, isTransparent, isWalkable, false );
+         SetCellProperties( x, y, isTransparent, isWalkable, false);
       }
 
       /// <summary>
@@ -663,7 +672,7 @@ namespace RogueSharp
       /// <returns>Cell at the specified location</returns>
       public ICell GetCell( int x, int y )
       {
-         return new Cell( x, y, _isTransparent[x, y], _isWalkable[x, y], _fieldOfView.IsInFov( x, y ), _isExplored[x, y] );
+         return new Cell( x, y, _isTransparent[x, y], _isWalkable[x, y], _fieldOfView.IsInFov( x, y ), _isExplored[x, y], _roomID[x, y] );
       }
 
       /// <summary>

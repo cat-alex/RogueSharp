@@ -63,5 +63,8 @@ namespace RogueSharp
       /// This property can be used to keep track of those Cells that have been "seen" and could be used to show fog-of-war type effects when rendering the map
       /// </example>
       bool IsExplored { get; }
+
+
+      int RoomID { get;  }
    }
 }
